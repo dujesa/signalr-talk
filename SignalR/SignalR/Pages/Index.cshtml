@@ -1,0 +1,14 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Websockets demo</h1>
+    <button id="ping-self-btn">Ping self</button>
+    <button id="ping-all-btn">Ping all</button>
+    <button id="trigger-fetch-btn">Trigger hub from controller w/ fetch Api</button>
+    <button id="direct-invoke-btn">Invoke directly</button>
+    <div id="messages-wrapper" style="display: flex; flex-direction: column-reverse"></div>
+</div>
