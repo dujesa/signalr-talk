@@ -3,13 +3,17 @@ using SignalR.Data;
 
 namespace SignalR.Hubs
 {
-    public class GroupHub : Hub
+    public interface IGroupInterface
+    {
+        Task GroupHook(Message data);
+    }
+
+    public class GroupHub : Hub<IGroupInterface>
     {
         public Task Join() => Groups.AddToGroupAsync(Context.ConnectionId, "group_name");
         public Task Leave() => Groups.RemoveFromGroupAsync(Context.ConnectionId, "group_name");
 
-        public Task SendMessage() => Clients
-            .Groups("group_name")
-            .SendAsync("group_message", new Message(69, "Secret group message"));
+        public Task SendMessage() => Clients.Group("group_name")
+            .GroupHook(new Message(69, "Secret group message"));
     }
 }

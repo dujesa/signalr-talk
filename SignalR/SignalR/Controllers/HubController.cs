@@ -16,7 +16,8 @@ namespace SignalR.Controllers
         [HttpGet("/send")]
         public async Task<IActionResult> SendMessage()
         {
-            await _hub.Clients.All.ClientHook(new(505, "505 with line!"));
+            await _hub.Clients.All
+                .ClientHook(new(CustomHub.InvocationCounter++, "Poruka direkt iz kontrolera!"));
 
             return Ok();
         }

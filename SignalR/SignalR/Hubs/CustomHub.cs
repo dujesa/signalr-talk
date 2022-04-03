@@ -3,6 +3,7 @@ using SignalR.Data;
 
 namespace SignalR.Hubs
 {
+    //predstavlja klijenta i njegove hook metode
     public interface IClientInterface
     {
         Task ClientHook(Message data);
@@ -15,9 +16,11 @@ namespace SignalR.Hubs
         public static int InvocationCounter { get; set; }
         public CustomHub(ILogger<CustomHub> logger) => _logger = logger;
 
-        public void ServerHook(Message data)
+        public void ServerHook(Message message)
         {
-            _logger.LogInformation($"Receiving data: {data}, {Context.ConnectionId}");
+            _logger.LogInformation($"Connection id: " +
+                $"{message}, {Context.ConnectionId}");
+            //pokazi kako se connection id mijenja iako mogu bit "logiran kao isti user" (refreshaj page)
         }
 
         public Task PingAll()
@@ -28,14 +31,14 @@ namespace SignalR.Hubs
 
         public Task PingSelf()
         {
-            return Clients.Caller.ClientHook(new(++InvocationCounter, "Ping all!"));
+            return Clients.Caller.ClientHook(new(++InvocationCounter, "Ping only me!"));
         }
 
         //Renameanje metode huba && returnanje Message-a iz nje direktno
         [HubMethodName("direct_invocation")]
         public Message InvokableFunction()
         {
-            return new Message(++InvocationCounter, $"Data returned from {nameof(InvokableFunction)}");
+            return new (++InvocationCounter, $"Data returned from {nameof(InvokableFunction)}");
         }
 
         //Hookovi za on conected/disconnected evente

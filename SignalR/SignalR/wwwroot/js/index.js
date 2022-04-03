@@ -1,32 +1,43 @@
-﻿let connection = new signalR.HubConnectionBuilder()
+﻿//setup konekcije
+let connection = new signalR.HubConnectionBuilder()
     .withUrl("/custom")
     .build();
 
-// after selfPing/allPing
-connection.on("ClientHook", data => 
-    displayMessage('ClientHook', data)
-);
-
-// after triggerFetch
-connection.on("client_function_name", data => displayMessage('client_function_name', data));
-
+//startanje konekcje
+//ServerHook => ime metode/hooka kojeg pozivamo sa server
 connection.start().then(() => {
     displayMessage('Init signalR', 'Connection established');
     connection.send('ServerHook', { id: 1, message: "We've connected" });
 });
 
-// call signalR hub function from client
-const pingSelf = () => connection.send('PingSelf')
+// poziva se sa servera iz selfPing/allPing
+const connect = () =>  connection.on("ClientHook", data => 
+    displayMessage('ClientHook', data)
+);
+const deconnect = () => connection.off('ClientHook');
+
+connect();
+
+// after triggerFetch - called from api controller
+connection.on("client_function_name", data => displayMessage('client_function_name', data));
 
 // call signalR hub function from client
 const pingAll = () => connection.send('PingAll')
+
+// call signalR hub function from client
+const pingSelf = () => connection.send('PingSelf')
 
 // trigger hub from controller
 const triggerFetch = () => fetch('/send')
 
 // call signalR hub function from client
-const directInvocation = () => connection.invoke('direct_invocation')
-    .then(data => displayMessage('Direct invocation response', data))
+// RAZLIKA! 1. INVOKE (ovdje)      => promise resolve tek kada dobijemo data-u u responseu sa bekenda
+//          2. SEND (u hookovima ) => promise resolvea kada uspjesno posaljemo data-u/message
+const directInvocation = async () => {
+    const response = await connection.invoke('direct_invocation');
+    displayMessage('Direct invocation response', response);
+};
+
 
 //ui handling
 const messagesWrapper = document.getElementById("messages-wrapper");
@@ -49,3 +60,9 @@ triggerFetchButton.onclick = () => triggerFetch();
 
 const directInvokeButton = document.getElementById("direct-invoke-btn");
 directInvokeButton.onclick = () => directInvocation();
+
+const deconnectButton = document.getElementById("deconnect-btn");
+deconnectButton.onclick = () => deconnect();
+
+const reconnectButton = document.getElementById("reconnect-btn");
+reconnectButton.onclick = () => connect();
