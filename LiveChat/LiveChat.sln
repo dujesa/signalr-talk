@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR", "SignalR\SignalR.csproj", "{2C069775-313B-4ED5-B92E-884245B28A87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveChat.API", "LiveChat.API\LiveChat.API.csproj", "{0582389A-7997-4074-9D52-096AD22BA344}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2C069775-313B-4ED5-B92E-884245B28A87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C069775-313B-4ED5-B92E-884245B28A87}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C069775-313B-4ED5-B92E-884245B28A87}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C069775-313B-4ED5-B92E-884245B28A87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0582389A-7997-4074-9D52-096AD22BA344}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0582389A-7997-4074-9D52-096AD22BA344}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0582389A-7997-4074-9D52-096AD22BA344}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0582389A-7997-4074-9D52-096AD22BA344}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {B3252975-FCC9-410E-BBDF-F8BBAAD7AC95}
+		SolutionGuid = {57B2C112-4AA5-4A99-935C-62A4148A02E6}
 	EndGlobalSection
 EndGlobal

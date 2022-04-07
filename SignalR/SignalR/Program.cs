@@ -28,7 +28,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapDefaultControllerRoute();
     endpoints.MapHub<CustomHub>("/custom");
-    endpoints.MapHub<GroupHub>("/groups");
+    endpoints.MapHub<GroupHub>("/group");
 });
 
 app.Run();

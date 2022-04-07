@@ -1,0 +1,29 @@
+﻿@page
+@model SignalR.Pages.GroupsModel
+@{
+    ViewData["Title"] = "Groups lobby";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="text-center">
+    <h1 class="display-4">Websockets demo</h1>
+    <button id="join-btn">Join group</button>
+    <button id="leave-btn">Leave group</button>
+    <button id="message-btn">Take a place</button>
+    <div id="messages-wrapper" style="display: flex; flex-direction: column-reverse"></div>
+
+    <input id="company-name" type="text">
+    <div id="checkboxes">
+      <label>Prostori opcije</label>
+      <ul id="positions-picker">
+        <li><input name="place-option" type="checkbox" value="Ispred akvarija">Ispred akvarija</li>
+        <li><input name="place-option" type="checkbox" value="Ispred A100">Ispred A100</li>
+        <li><input name="place-option" type="checkbox" value="Ispred A101">Isprid A101</li>
+        <li><input name="place-option" type="checkbox" value="Ispred refererade">Ispred referade</li>
+        <li><input name="place-option" type="checkbox" value="Kraj domara">Kraj domara</li>
+      </ul>
+    </div>
+</div>
+
+<script src="~/lib/signalr/signalr.js"></script>
+<script src="~/js/groups.js" asp-append-version="true"></script>
